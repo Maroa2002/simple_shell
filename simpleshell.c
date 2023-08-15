@@ -10,6 +10,7 @@ void showprompt(void)
 void executemd(char *input_command)
 {
 	pid_t ourpid;
+	int status;
 	char *argv[2];
 
 	argv[0] = input_command;
@@ -25,7 +26,7 @@ void executemd(char *input_command)
 	}
 	else
 	{
-		wait(NULL);
+		wait(&status);
 	}
 }
 
@@ -48,12 +49,14 @@ int main(int argc, char *argv[])
 			exit(0);
 		}
 
+		if (inputptr[bytesread - 1] == '\n')
+			inputptr[bytesread -1] = '\0';
+
 		printf("%s\n", inputptr);
 		/* printf("%ld\n", bytesread); */
 		/* printf("%ld\n", strlen(inputptr)); */
 
 		executemd(inputptr);
-		
 	}
 	free(inputptr);
 
