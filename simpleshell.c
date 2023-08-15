@@ -21,8 +21,10 @@ void executemd(char *input_command)
 	else if (ourpid == 0)
 	{
 		if (execve(input_command, argv, environ) == -1)
+		{
 			perror("Exec error");
-		
+			exit(EXIT_FAILURE);
+		}
 	}
 	else
 	{
