@@ -50,9 +50,13 @@ int main(int argc, char *argv[])
 			write(STDOUT_FILENO, "\n", 1);
 			exit(0);
 		}
+		else if (bytesread == -1)
+		{
+			perror("Error");
+			exit(EXIT_FAILURE);
+		}
 
-		if (inputptr[bytesread - 1] == '\n')
-			inputptr[bytesread -1] = '\0';
+		inputptr[bytesread -1] = '\0';
 
 		printf("%s\n", inputptr);
 		/* printf("%ld\n", bytesread); */
