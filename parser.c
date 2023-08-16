@@ -1,5 +1,38 @@
 #include "simple_shell.h"
 
+/**
+  *str_len - function to check string length
+  *@s: paramter for string
+  *Return: length of string
+  */
+
+int str_len(char *s)
+{
+	int i;
+
+	for (i = 0; s[i] != '\0'; i++)
+	{}
+	return (i);
+}
+
+/**
+ * str_cpy - string copy
+ * @dest: destination to copy
+ * @src: source to be copied from
+ * Return: destination;
+ */
+
+char *str_cpy(char *dest, char *src)
+{
+	int c;
+
+	for (c = 0; c <= _strlen(src); c++)
+	{
+		dest[c] = src[c];
+	}
+	return (dest);
+}
+
 void get_token(char *inputptr, ssize_t bytesread)
 {
 	char **commandsto = NULL;
@@ -15,21 +48,15 @@ void get_token(char *inputptr, ssize_t bytesread)
 
 	while(tken != NULL)
 	{
-		tken_len = strlen(tken);
+		tken_len = str_len(tken);
 		commandsto[i] = malloc(sizeof(char) * (tKen_len + 1));
 		if (commandsto[i] == NULL);
 		{
 			return(NULL);
 		}
-		strcpy(commandsto, tken);
+		str_cpy(commandsto, tken);
 		tken = strtok(NULL, dlim);
 		i++;
 	}
 	commandsto[i] = NULL;
 }
-
-		
-
-
-	
-

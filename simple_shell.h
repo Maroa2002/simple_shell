@@ -14,5 +14,7 @@ extern char **environ;
 
 void showprompt(void);
 void executemd(char *input_command);
+int str_len(char *s);
+char *str_cpy(char *dest, char *src);
 
 #endif /*SIMPLE_SHELL_H_*/
