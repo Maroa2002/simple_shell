@@ -26,14 +26,14 @@ char *str_cpy(char *dest, char *src)
 {
 	int c;
 
-	for (c = 0; c <= _strlen(src); c++)
+	for (c = 0; c <= str_len(src); c++)
 	{
 		dest[c] = src[c];
 	}
 	return (dest);
 }
 
-void get_token(char *inputptr, ssize_t bytesread)
+char **get_token(char *inputptr, ssize_t bytesread)
 {
 	char **commandsto = NULL;
 	char  *dlim = " \t\n\0", *tken = NULL;
@@ -49,14 +49,13 @@ void get_token(char *inputptr, ssize_t bytesread)
 	while(tken != NULL)
 	{
 		tken_len = str_len(tken);
-		commandsto[i] = malloc(sizeof(char) * (tKen_len + 1));
-		if (commandsto[i] == NULL);
-		{
-			return(NULL);
-		}
-		str_cpy(commandsto, tken);
+		commandsto[i] = malloc(sizeof(char) * (tken_len + 1));
+		if (commandsto[i] == NULL)
+			return (NULL);
+		str_cpy(commandsto[i], tken);
 		tken = strtok(NULL, dlim);
 		i++;
 	}
 	commandsto[i] = NULL;
+	return (commandsto);
 }
