@@ -118,9 +118,8 @@ char *find_executable(char *cmd)
 		{
 			perror("Executable not found");
 			free(filepth);
-			return (NULL);
+			tk = strtok(NULL, ":");
 		}	
-		tk = strtok(NULL, ":");
 	}
 	return (NULL);
 }
