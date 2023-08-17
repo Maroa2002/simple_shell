@@ -7,20 +7,17 @@ void showprompt(void)
 	write(STDOUT_FILENO, promptptr, 10);
 }
 
-void executemd(char *input_command)
+void executemd(char **input_command)
 {
 	pid_t ourpid;
 	int status;
-	char *argv[2];
 
-	argv[0] = input_command;
-	argv[1] = NULL;
 	ourpid = fork();
 	if (ourpid == -1)
 		perror("Fork error");
 	else if (ourpid == 0)
 	{
-		if (execve(input_command, argv, environ) == -1)
+		if (execve(input_command[0], input_command, environ) == -1)
 		{
 			perror("Exec error");
 			exit(EXIT_FAILURE);
@@ -37,6 +34,7 @@ int main(int argc, char *argv[])
 	char *inputptr;
 	size_t s = 0;
 	ssize_t bytesread;
+	char **tkn_command;
 
 	(void)argc; (void)argv;
 
@@ -57,13 +55,10 @@ int main(int argc, char *argv[])
 		}
 
 		inputptr[bytesread -1] = '\0';
-
-		printf("%s\n", inputptr);
-		/* printf("%ld\n", bytesread); */
-		/* printf("%ld\n", strlen(inputptr)); */
-
-		executemd(inputptr);
+		tkn_command = get_token(inputptr, bytesread);
+		executemd(tkn_command);
 	}
+
 	free(inputptr);
 
 	return (0);

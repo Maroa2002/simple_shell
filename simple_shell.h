@@ -13,8 +13,8 @@ extern char **environ;
 #include <sys/wait.h>
 
 void showprompt(void);
-void executemd(char *input_command);
+void executemd(char **input_command);
 int str_len(char *s);
 char *str_cpy(char *dest, char *src);
-
+char **get_token(char *inputptr, ssize_t bytesread);
 #endif /*SIMPLE_SHELL_H_*/
