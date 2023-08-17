@@ -96,7 +96,7 @@ char *find_executable(char *cmd)
 	if (path == NULL)
 	{
 		perror("No match");
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
 	
 	tk = strtok(path, ":");
@@ -118,7 +118,7 @@ char *find_executable(char *cmd)
 		{
 			perror("Executable not found");
 			free(filepth);
-			exit(EXIT_FAILURE);
+			return (NULL);
 		}	
 		tk = strtok(NULL, ":");
 	}

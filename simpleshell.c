@@ -11,13 +11,14 @@ void executemd(char **input_command)
 {
 	pid_t ourpid;
 	int status;
+	char *filecmd = find_executable(input_command[0]);
 
 	ourpid = fork();
 	if (ourpid == -1)
 		perror("Fork error");
 	else if (ourpid == 0)
 	{
-		if (execve(input_command[0], input_command, environ) == -1)
+		if (execve(filecmd, input_command, environ) == -1)
 		{
 			perror("Exec error");
 			exit(EXIT_FAILURE);
