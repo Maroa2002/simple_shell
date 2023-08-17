@@ -17,4 +17,7 @@ void executemd(char **input_command);
 int str_len(char *s);
 char *str_cpy(char *dest, char *src);
 char **get_token(char *inputptr, ssize_t bytesread);
+int _strcmp(char *s1, char *s2);
+char *_strdup(char *str);
+
 #endif /*SIMPLE_SHELL_H_*/
