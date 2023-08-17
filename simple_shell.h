@@ -18,4 +18,7 @@ int str_len(char *s);
 char *str_cpy(char *dest, char *src);
 char **get_token(char *inputptr, ssize_t bytesread);
 int _strcmp(char *s1, char *s2);
+char *str_cat(char *dest, char *src);
+char *str_dup(char *str);
+
 #endif /*SIMPLE_SHELL_H_*/
