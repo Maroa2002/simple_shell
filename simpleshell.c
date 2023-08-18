@@ -96,7 +96,7 @@ int main(int argc, char *argv[])
 		}
 		inputptr[bytesread - 1] = '\0';
 		tkn_command = get_token(inputptr, bytesread);
-		if (tkn_command != NULL)
+		if (tkn_command != NULL && tkn_command[0] != NULL)
 		{
 			if (_strcmp(tkn_command[0], "exit") == 0)
 				exit(0);
