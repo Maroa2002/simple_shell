@@ -32,7 +32,12 @@ char *str_cpy(char *dest, char *src)
 	}
 	return (dest);
 }
-
+/**
+  *get_token - function to tokenize string based on delimiters
+  *@inputptr: string inputted at line
+  *@bytesread: bytes read at line from inputptr
+  *Return: arrau of token pointers
+  */
 char **get_token(char *inputptr, ssize_t bytesread)
 {
 	char **commandsto = NULL;
@@ -46,7 +51,7 @@ char **get_token(char *inputptr, ssize_t bytesread)
 
 	tken = strtok(inputptr, dlim);
 
-	while(tken != NULL)
+	while (tken != NULL)
 	{
 		tken_len = str_len(tken);
 		commandsto[i] = malloc(sizeof(char) * (tken_len + 1));

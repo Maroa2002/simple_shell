@@ -23,7 +23,7 @@ int _strcmp(char *s1, char *s2)
 	return (0);
 }
 /**
-  *_strdup - function to return pointer to new memory
+  *str_dup - function to return pointer to new memory
   *@str: string to copy
   *Return: NULL, pointer to memory
   */
@@ -52,7 +52,7 @@ char *str_dup(char *str)
 	return (dup);
 }
 /**
-  **_strcat - function that concantenates
+  **str_cat - function that concantenates
   *@dest: parameter to be appended
   *@src: parameter to be concantenated
   *Return: dest
@@ -74,6 +74,10 @@ char *str_cat(char *dest, char *src)
 	dest[i] = '\0';
 	return (dest);
 }
+/**
+  *path_finder - function that finds and returns value of PATH
+  *Return: Value of path or NULL
+  */
 char *path_finder(void)
 {
 	char **ev = environ;
@@ -87,7 +91,11 @@ char *path_finder(void)
 
 	return (NULL);
 }
-
+/**
+  *find_executable - function to find executable after a command is given
+  *@cmd: command
+  *Return: NULL on failure
+  */
 char *find_executable(char *cmd)
 {
 	char *path = path_finder(), *tk, *filepth;
@@ -98,7 +106,6 @@ char *find_executable(char *cmd)
 		perror("No match");
 		return (NULL);
 	}
-	
 	tk = strtok(path, ":");
 	while (tk)
 	{
@@ -115,7 +122,7 @@ char *find_executable(char *cmd)
 		if (access(filepth, X_OK) == 0)
 			return (filepth);
 		free(filepth);
-		tk = strtok(NULL, ":");	
+		tk = strtok(NULL, ":");
 	}
 	return (NULL);
 }

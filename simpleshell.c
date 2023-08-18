@@ -1,12 +1,18 @@
 #include "simple_shell.h"
-
+/**
+  *showprompt - function to displat prompt on terminal
+  *
+  */
 void showprompt(void)
 {
 	char *promptptr = "GHshell $ ";
 
 	write(STDOUT_FILENO, promptptr, 10);
 }
-
+/**
+  *executemd - function to execute external command using execve
+  *input_command: command to be executed
+  */
 void executemd(char **input_command)
 {
 	pid_t ourpid;
@@ -16,13 +22,11 @@ void executemd(char **input_command)
 	if (filecmd == NULL)
 	{
 		perror("Executable not found");
-		return;
 	}
 	ourpid = fork();
 	if (ourpid == -1)
 	{
 		perror("Fork error");
-		return;
 	}
 	else if (ourpid == 0)
 	{
@@ -37,7 +41,12 @@ void executemd(char **input_command)
 		wait(&status);
 	}
 }
-
+/**
+  *main - accepts command line arguments
+  *@argc: number of command line arguments
+  *@argv: array of arguments
+  *Return: 0
+  */
 int main(int argc, char *argv[])
 {
 	char *inputptr;
@@ -46,7 +55,8 @@ int main(int argc, char *argv[])
 	char **tkn_command;
 	int i;
 
-	(void)argc; (void)argv;
+	(void)argc;
+	(void)argv;
 
 	while (1)
 	{
@@ -65,7 +75,7 @@ int main(int argc, char *argv[])
 			free(inputptr);
 			exit(EXIT_FAILURE);
 		}
-		inputptr[bytesread -1] = '\0';
+		inputptr[bytesread - 1] = '\0';
 		tkn_command = get_token(inputptr, bytesread);
 		if (tkn_command != NULL)
 		{
