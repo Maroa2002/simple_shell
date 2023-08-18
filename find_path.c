@@ -109,7 +109,7 @@ char *find_executable(char *cmd)
 			perror("Malloc error");
 			exit(EXIT_FAILURE);
 		}
-		strcpy(filepth, tk);
+		str_cpy(filepth, tk);
 		str_cat(filepth, "/");
 		str_cat(filepth, cmd);
 		if (access(filepth, X_OK) == 0)

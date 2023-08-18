@@ -13,9 +13,17 @@ void executemd(char **input_command)
 	int status;
 	char *filecmd = find_executable(input_command[0]);
 
+	if (filecmd == NULL)
+	{
+		perror("Executable not found");
+		return;
+	}
 	ourpid = fork();
 	if (ourpid == -1)
+	{
 		perror("Fork error");
+		return;
+	}
 	else if (ourpid == 0)
 	{
 		if (execve(filecmd, input_command, environ) == -1)
@@ -36,6 +44,7 @@ int main(int argc, char *argv[])
 	size_t s = 0;
 	ssize_t bytesread;
 	char **tkn_command;
+	int i;
 
 	(void)argc; (void)argv;
 
@@ -47,20 +56,27 @@ int main(int argc, char *argv[])
 		if (bytesread == EOF)
 		{
 			write(STDOUT_FILENO, "\n", 1);
+			free(inputptr);
 			exit(0);
 		}
 		else if (bytesread == -1)
 		{
-			perror("Error");
+			perror("Error reading input");
+			free(inputptr);
 			exit(EXIT_FAILURE);
 		}
-
 		inputptr[bytesread -1] = '\0';
 		tkn_command = get_token(inputptr, bytesread);
-		executemd(tkn_command);
+		if (tkn_command != NULL)
+		{
+			executemd(tkn_command);
+			for (i = 0; tkn_command[i] != NULL; i++)
+			{
+				free(tkn_command[i]);
+			}
+			free(tkn_command);
+		}
 	}
-
 	free(inputptr);
-
 	return (0);
 }
