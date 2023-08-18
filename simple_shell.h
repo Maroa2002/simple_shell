@@ -21,5 +21,6 @@ int _strcmp(char *s1, char *s2);
 char *str_cat(char *dest, char *src);
 char *str_dup(char *str);
 char *find_executable(char *cmd);
-
+void printenv();
+void EOF_handler(char *inputptr);
 #endif /*SIMPLE_SHELL_H_*/
