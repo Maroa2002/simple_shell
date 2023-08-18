@@ -109,17 +109,13 @@ char *find_executable(char *cmd)
 			perror("Malloc error");
 			exit(EXIT_FAILURE);
 		}
-		filepth = str_dup(tk);
+		strcpy(filepth, tk);
 		str_cat(filepth, "/");
 		str_cat(filepth, cmd);
 		if (access(filepth, X_OK) == 0)
 			return (filepth);
-		else
-		{
-			perror("Executable not found");
-			free(filepth);
-			tk = strtok(NULL, ":");
-		}	
+		free(filepth);
+		tk = strtok(NULL, ":");	
 	}
 	return (NULL);
 }
