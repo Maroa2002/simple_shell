@@ -25,17 +25,21 @@ void executemd(char **input_command)
 	if (filecmd == NULL)
 	{
 		perror("Executable not found");
+		return;
 	}
 	ourpid = fork();
 	if (ourpid == -1)
 	{
 		perror("Fork error");
+		free(filecmd);
+		return;
 	}
 	else if (ourpid == 0)
 	{
 		if (execve(filecmd, input_command, environ) == -1)
 		{
 			perror("Exec error");
+			free(filecmd);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -43,6 +47,7 @@ void executemd(char **input_command)
 	{
 		wait(&status);
 	}
+	free(filecmd);
 }
 /**
  * EOF_handler - handles EOF

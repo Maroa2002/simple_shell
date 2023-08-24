@@ -42,7 +42,7 @@ char *str_dup(char *str)
 	dup = malloc(sizeof(char) * (i + 1));
 
 	if (dup == NULL)
-	return (NULL);
+		return (NULL);
 
 	for (j = 0; str[j]; j++)
 	{
