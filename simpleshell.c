@@ -20,34 +20,43 @@ void executemd(char **input_command)
 {
 	pid_t ourpid;
 	int status;
-	char *filecmd = find_executable(input_command[0]);
+	char *filecmd;
 
-	if (filecmd == NULL)
-	{
-		perror("Executable not found");
-		return;
-	}
 	ourpid = fork();
 	if (ourpid == -1)
 	{
 		perror("Fork error");
-		free(filecmd);
 		return;
 	}
 	else if (ourpid == 0)
 	{
-		if (execve(filecmd, input_command, environ) == -1)
+		if (access(input_command[0], X_OK) == 0)
 		{
-			perror("Exec error");
+			if (execve(input_command[0], input_command, environ) == -1)
+			{
+				perror("Error");
+				exit(EXIT_FAILURE);
+			}
+		}
+		else
+		{
+			filecmd = find_executable(input_command[0]);
+			if (filecmd == NULL)
+			{
+				perror("Error");
+				exit(EXIT_FAILURE);
+			}
+			if (execve(filecmd, input_command, environ) == -1)
+			{
+				perror("Exec error");
+				free(filecmd);
+				exit(EXIT_FAILURE);
+			}
 			free(filecmd);
-			exit(EXIT_FAILURE);
 		}
 	}
 	else
-	{
 		wait(&status);
-	}
-	free(filecmd);
 }
 /**
  * EOF_handler - handles EOF
@@ -108,8 +117,6 @@ int main(int argc, char *argv[])
 		{
 			if (_strcmp(tkn_command[0], "exit") == 0)
 				exit(0);
-			else if (_strcmp(tkn_command[0], "env") == 0)
-				printenv();
 			else
 				executemd(tkn_command);
 			for (i = 0; tkn_command[i] != NULL; i++)
