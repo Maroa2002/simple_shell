@@ -5,9 +5,12 @@
   */
 void showprompt(void)
 {
+	if (isatty(STDIN_FILENO))
+	{
 	char *promptptr = "GHshell $ ";
 
 	write(STDOUT_FILENO, promptptr, 10);
+	}
 }
 /**
   *executemd - function to execute external command using execve

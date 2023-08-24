@@ -98,7 +98,7 @@ char *path_finder(void)
   */
 char *find_executable(char *cmd)
 {
-	char *path = path_finder(), *tk, *filepth;
+	char *path = path_finder(), *tk, *filepth, *filepthdup;
 	int cmd_len = str_len(cmd), path_len;
 
 	if (path == NULL)
@@ -120,7 +120,11 @@ char *find_executable(char *cmd)
 		str_cat(filepth, "/");
 		str_cat(filepth, cmd);
 		if (access(filepth, X_OK) == 0)
-			return (filepth);
+		{
+			filepthdup = str_dup(filepth);
+			free(filepth);
+			return (filepthdup);
+		}
 		free(filepth);
 		tk = strtok(NULL, ":");
 	}
