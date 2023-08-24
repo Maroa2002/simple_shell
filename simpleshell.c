@@ -7,9 +7,9 @@ void showprompt(void)
 {
 	if (isatty(STDIN_FILENO))
 	{
-	char *promptptr = "GHshell $ ";
+	char *promptptr = "$ ";
 
-	write(STDOUT_FILENO, promptptr, 10);
+	write(STDOUT_FILENO, promptptr, 2);
 	}
 }
 /**
