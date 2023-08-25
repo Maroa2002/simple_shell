@@ -42,7 +42,7 @@ char **get_token(char *inputptr, ssize_t bytesread)
 {
 	char **commandsto = NULL;
 	char  *dlim = " \t\n\0", *tken = NULL;
-	int i = 0;
+	int i = 0, j;
 	int tken_len;
 
 	commandsto = malloc(sizeof(char *) * (bytesread + 1));
@@ -56,7 +56,14 @@ char **get_token(char *inputptr, ssize_t bytesread)
 		tken_len = str_len(tken);
 		commandsto[i] = malloc(sizeof(char) * (tken_len + 1));
 		if (commandsto[i] == NULL)
+		{
+			for (j = 0; j < i; j++)
+			{
+				free(commandsto[j]);
+			}
+			free(commandsto);
 			return (NULL);
+		}
 		str_cpy(commandsto[i], tken);
 		tken = strtok(NULL, dlim);
 		i++;
