@@ -111,15 +111,10 @@ char *find_executable(char *cmd)
 	{
 		path_len = str_len(tk);
 		if (cmd_len + path_len + 2 > MAX_PATH_LENGTH)
-		{
-			return NULL;
-		}
-		
+			return (NULL);
 		filepth = (char *)malloc(MAX_PATH_LENGTH);
 		if (filepth == NULL)
-		{
-			return NULL;
-		}
+			return (NULL);
 
 		str_cpy(filepth, tk);
 		str_cat(filepth, "/");
