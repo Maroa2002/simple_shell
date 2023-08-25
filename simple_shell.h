@@ -23,4 +23,6 @@ char *str_dup(char *str);
 char *find_executable(char *cmd);
 void printenv(void);
 void EOF_handler(char *inputptr);
+void free_tokens(char **commandsto);
+
 #endif /*SIMPLE_SHELL_H_*/

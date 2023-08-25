@@ -64,3 +64,16 @@ char **get_token(char *inputptr, ssize_t bytesread)
 	commandsto[i] = NULL;
 	return (commandsto);
 }
+void free_tokens(char **commandsto)
+{
+	int i;
+
+	if (commandsto == NULL)
+		return;
+
+	for (i = 0; commandsto[i] != NULL; i++)
+	{
+		free(commandsto[i]);
+	}
+	free(commandsto);
+}
