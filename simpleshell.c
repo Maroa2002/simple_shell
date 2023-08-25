@@ -64,7 +64,8 @@ void executemd(char **input_command)
  **/
 void EOF_handler(char *inputptr)
 {
-	write(STDOUT_FILENO, "\n", 1);
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "\n", 1);
 	free(inputptr);
 	exit(0);
 }
@@ -91,7 +92,7 @@ void printenv(void)
   */
 int main(int argc, char *argv[])
 {
-	char *inputptr, **tkn_command;
+	char *inputptr = NULL, **tkn_command;
 	size_t s = 0;
 	ssize_t bytesread;
 	int i;
