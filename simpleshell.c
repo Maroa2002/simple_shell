@@ -91,7 +91,7 @@ void printenv(void)
   */
 int main(int argc, char *argv[])
 {
-	char *inputptr = NULL, **tkn_command;
+	char *inputptr = NULL, **tkn_command = NULL;
 	size_t s = 0;
 	ssize_t bytesread;
 	int i;
