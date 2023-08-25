@@ -1,6 +1,7 @@
 #ifndef SIMPLE_SHELL_H_
 #define SIMPLE_SHELL_H_
 
+#define SIZE_BUF 1024
 #define MAX_PATH_LENGTH 256
 
 /* Global extern variable */
@@ -26,5 +27,6 @@ char *find_executable(char *cmd);
 void printenv(void);
 void EOF_handler(char *inputptr);
 void free_tokens(char **commandsto);
+int _cd(const char *dir);
 
 #endif /*SIMPLE_SHELL_H_*/
