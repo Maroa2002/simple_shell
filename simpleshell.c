@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 		if (tkn_command != NULL && tkn_command[0] != NULL)
 		{
 			if (_strcmp(tkn_command[0], "exit") == 0)
-				shell_exit(tkn_command);
+				exit(EXIT_SUCCESS);
 			else
 				executemd(tkn_command);
 			for (i = 0; tkn_command[i] != NULL; i++)

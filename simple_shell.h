@@ -26,7 +26,5 @@ char *find_executable(char *cmd);
 void printenv(void);
 void EOF_handler(char *inputptr);
 void free_tokens(char **commandsto);
-void shell_exit(char **command);
-int _atoi(char *s);
 
 #endif /*SIMPLE_SHELL_H_*/
