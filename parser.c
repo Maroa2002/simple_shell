@@ -89,24 +89,3 @@ void free_tokens(char **commandsto)
 	}
 	free(commandsto);
 }
-
-/**
-  * _cd - custom cd
-  * @dir: directory
-  * Return: 0 on success,
-  * -1 on failure
-  */
-int _cd(const char *dir)
-{
-	char *bf = NULL;
-	size_t size = SIZE_BUF;
-
-	if (dir == NULL)
-		dir = getcwd(bf, size);
-	if (chdir(dir) == -1)
-	{
-		perror(dir);
-		return (98);
-	}
-	return (1);
-}

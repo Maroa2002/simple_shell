@@ -117,8 +117,6 @@ int main(int argc, char *argv[])
 		{
 			if (_strcmp(tkn_command[0], "exit") == 0)
 				exit(EXIT_SUCCESS);
-			else if (_strcmp(tkn_command[0], "cd") != 0)
-				_cd(tkn_command[1]);
 			else
 				executemd(tkn_command);
 			for (i = 0; tkn_command[i] != NULL; i++)
