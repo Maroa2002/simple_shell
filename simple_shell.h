@@ -1,6 +1,8 @@
 #ifndef SIMPLE_SHELL_H_
 #define SIMPLE_SHELL_H_
 
+#define MAX_PATH_LENGTH 256
+
 /* Global extern variable */
 extern char **environ;
 

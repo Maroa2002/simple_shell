@@ -98,8 +98,8 @@ char *path_finder(void)
   */
 char *find_executable(char *cmd)
 {
-	char *path = path_finder(), *tk, *filepth, *filepthdup;
-	int cmd_len = str_len(cmd), path_len;
+	char *path = path_finder(), *tk, *filepth;
+	size_t cmd_len = str_len(cmd), path_len;
 
 	if (path == NULL)
 	{
@@ -110,20 +110,23 @@ char *find_executable(char *cmd)
 	while (tk)
 	{
 		path_len = str_len(tk);
-		filepth = malloc(cmd_len + path_len + 2);
+		if (cmd_len + path_len + 2 > MAX_PATH_LENGTH)
+		{
+			return NULL;
+		}
+		
+		filepth = (char *)malloc(MAX_PATH_LENGTH);
 		if (filepth == NULL)
 		{
-			perror("Malloc error");
-			exit(EXIT_FAILURE);
+			return NULL;
 		}
+
 		str_cpy(filepth, tk);
 		str_cat(filepth, "/");
 		str_cat(filepth, cmd);
 		if (access(filepth, X_OK) == 0)
 		{
-			filepthdup = str_dup(filepth);
-			free(filepth);
-			return (filepthdup);
+			return (filepth);
 		}
 		free(filepth);
 		tk = strtok(NULL, ":");

@@ -49,7 +49,6 @@ void executemd(char **input_command)
 			if (execve(filecmd, input_command, environ) == -1)
 			{
 				perror("Exec error");
-				free(filecmd);
 				exit(EXIT_FAILURE);
 			}
 			free(filecmd);
