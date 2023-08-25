@@ -64,6 +64,11 @@ char **get_token(char *inputptr, ssize_t bytesread)
 	commandsto[i] = NULL;
 	return (commandsto);
 }
+/**
+ * free_tokens - free memory
+ * @commandsto: to be freed
+ * Return: void
+ **/
 void free_tokens(char **commandsto)
 {
 	int i;
